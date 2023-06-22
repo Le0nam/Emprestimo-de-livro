@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emprestimo de livro", "Emprestimo de livro.csproj", "{AA3A93B0-71DF-4DE6-883F-BCEB67397C9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA3A93B0-71DF-4DE6-883F-BCEB67397C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3A93B0-71DF-4DE6-883F-BCEB67397C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3A93B0-71DF-4DE6-883F-BCEB67397C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3A93B0-71DF-4DE6-883F-BCEB67397C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DD51207-A5A9-45ED-B95E-F5A41F7DDB2D}
+	EndGlobalSection
+EndGlobal

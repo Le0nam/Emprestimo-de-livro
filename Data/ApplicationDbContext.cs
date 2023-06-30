@@ -10,7 +10,7 @@ namespace Emprestimo_de_livro.Data
             
         }
 
-
         public DbSet<EmprestimoModel> Emprestimos { get; set; }
+        public DbSet<ContaModel> Contas { get; set; }
     }
 }

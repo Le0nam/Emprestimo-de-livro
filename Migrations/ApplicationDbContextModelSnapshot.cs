@@ -22,6 +22,34 @@ namespace Emprestimo_de_livro.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Emprestimo_de_livro.Models.ContaModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CPF")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RG")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Situação")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contas");
+                });
+
             modelBuilder.Entity("Emprestimo_de_livro.Models.EmprestimoModel", b =>
                 {
                     b.Property<int>("Id")
@@ -44,6 +72,9 @@ namespace Emprestimo_de_livro.Migrations
                     b.Property<string>("Recebedor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Verificação")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

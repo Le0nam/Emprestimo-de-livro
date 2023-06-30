@@ -1,12 +1,17 @@
 ﻿@model IEnumerable<EmprestimoModel>
+@{
+    ViewData["Title"] = "Emprestimo de Livro";
+}
 <div class="">
     <div class="d-flex justify-content-between align-items-center">
         <h1>Emprestimos</h1>
+        <a class="btn btn-outline-info" asp-controller="Emprestimo" asp-action="CancelarRemoção">Emprestimos Removidos</a>
         <a class="btn btn-success" asp-controller="Emprestimo" asp-action="AdicionarEmprestimo">Cadastrar novo Emprestimo</a>
     </div>
 <table class="table table-hover">
     <thead>
         <tr>
+            <th>Id</th>
             <th scope="col">Recebedor</th>
             <th scope="col">Fornecedor</th>
             <th scope="col">Livro</th>
@@ -16,14 +21,20 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach(var emprestimo in Model)
+            @foreach(var emprestimo in Model.ToList())
             {
-                <tr>
-                    <th scope="row">@emprestimo.Recebedor</th>
-                    <td>@emprestimo.Fornecedor</td>
-                    <td>@emprestimo.Livro</td>
-                    <td>@emprestimo.DataUltimaAtualização</td>
-                </tr>
+                @if ( emprestimo.Verificação != false)
+                {
+                    <tr>
+                        <th scope="row">@emprestimo.Id</th>
+                        <th scope="row">@emprestimo.Recebedor</th>
+                        <td>@emprestimo.Fornecedor</td>
+                        <td>@emprestimo.Livro</td>
+                        <td>@emprestimo.DataUltimaAtualização</td>
+                        <td><a class="btn btn-outline-warning text-black" asp-controller="Emprestimo" asp-route-id="@emprestimo.Id" asp-action="Editar">Editar</a></td>
+                        <td><a class="btn btn-outline-danger text-black" asp-controller="Emprestimo" asp-route-id="@emprestimo.Id" asp-action="Remover">Remover</a></td>
+                    </tr>
+                }
             }
         }
     </tbody>

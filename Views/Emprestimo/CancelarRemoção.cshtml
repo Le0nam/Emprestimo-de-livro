@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EmprestimoModel>
+@{
+    ViewData["Title"] = "Emprestimos Removidos";
+}
+<div class="">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Emprestimos Removidos</h1>
+        <a class="btn btn-outline-info" asp-controller="Emprestimo" asp-action="Index"></a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th scope="col">Recebedor</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Livro</th>
+                <th scope="col">Data Do Emprestimo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var emprestimo in Model)
+                {
+                    @if (emprestimo.Verificação != true)
+                    {
+                        <tr>
+                            <th scope="row">@emprestimo.Id</th>
+                            <th scope="row">@emprestimo.Recebedor</th>
+                            <td>@emprestimo.Fornecedor</td>
+                            <td>@emprestimo.Livro</td>
+                            <td>@emprestimo.DataUltimaAtualização</td>
+                            <td><a class="btn btn-outline-danger text-black" asp-controller="Emprestimo" asp-route-id="@emprestimo.Id" asp-action="Restaurar">Restaurar</a></td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -11,6 +11,8 @@ namespace Emprestimo_de_livro.Models
         public string Fornecedor { get; set; }
         [Required(ErrorMessage = "Digite o nome do Livro")]
         public string Livro { get; set;}
+        public bool Verificação { get; set; }
         public DateTime DataUltimaAtualização { get; set; } = DateTime.Now;
+
     }
 }

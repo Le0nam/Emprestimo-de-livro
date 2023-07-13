@@ -29,7 +29,7 @@ namespace Emprestimo_de_livro.Controllers
         {
             if (ModelState.IsValid)
             {
-                emprestimos.Verificação = true;
+                
                 _db.Emprestimos.Add(emprestimos);
                
                 _db.SaveChanges();
@@ -76,7 +76,7 @@ namespace Emprestimo_de_livro.Controllers
             EmprestimoModel emprestimo = _db.Emprestimos
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
-            emprestimo.Verificação = false;
+            emprestimo.Verificação = true;
             //_db.Remove(emprestimo);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -93,9 +93,14 @@ namespace Emprestimo_de_livro.Controllers
 
             }
             EmprestimoModel emprestimo = _db.Emprestimos.Where(x => x.Id == id).FirstOrDefault();
-            emprestimo.Verificação = true;
+            emprestimo.Verificação = false;
             _db.SaveChanges();
             return RedirectToAction("CancelarRemoção");
+        }
+        public IActionResult buscar()
+        {
+            EmprestimoModel emprestimo = 
+            return RedirectToAction("Index");
         }
     }
 }

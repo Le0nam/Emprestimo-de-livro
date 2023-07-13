@@ -23,7 +23,7 @@
         {
             @foreach(var emprestimo in Model.ToList())
             {
-                @if ( emprestimo.Verificação != false)
+                @if ( emprestimo.Verificação != true)
                 {
                     <tr>
                         <th scope="row">@emprestimo.Id</th>

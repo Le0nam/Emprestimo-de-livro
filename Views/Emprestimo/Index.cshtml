@@ -1,8 +1,8 @@
-﻿@model IEnumerable<EmprestimoModel>
+﻿@model PagedList.IPagedList<EmprestimoModel>
 @{
     ViewData["Title"] = "Emprestimo de Livro";
 }
-<div class="">
+
     <div class="d-flex justify-content-between align-items-center">
         <h1>Emprestimos</h1>
         <a class="btn btn-outline-info" asp-controller="Emprestimo" asp-action="CancelarRemoção">Emprestimos Removidos</a>
@@ -21,9 +21,9 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach(var emprestimo in Model.ToList())
+            @foreach(var emprestimo in Model)
             {
-                @if ( emprestimo.Verificação != false)
+                @if ( emprestimo.Verificação != true)
                 {
                     <tr>
                         <th scope="row">@emprestimo.Id</th>
@@ -39,4 +39,31 @@
         }
     </tbody>
 </table>
+<div>
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("< Anterior", "Index", new { pagina = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+
+        @Html.Raw(" ")
+        ;
+        @:< Anterior
+    }
+
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Próxima >", "Index", new { pagina = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+        
+    }
+    else
+    {
+        @:Próxima >
+        @Html.Raw(" ")
+        
+    }
 </div>

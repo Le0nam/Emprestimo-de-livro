@@ -3,6 +3,7 @@ using Emprestimo_de_livro.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.DataClassification;
 using Microsoft.VisualBasic;
+using PagedList;
 using System.Data.SqlTypes;
 using System.Linq;
 
@@ -15,10 +16,15 @@ namespace Emprestimo_de_livro.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
+            
             IEnumerable<EmprestimoModel> emprestimos = _db.Emprestimos;
-            return View(emprestimos);
+
+            int paginaTamanho = 1;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(emprestimos.ToPagedList(paginaNumero, paginaTamanho));
         }
         public IActionResult AdicionarEmprestimo()
         {
@@ -29,7 +35,7 @@ namespace Emprestimo_de_livro.Controllers
         {
             if (ModelState.IsValid)
             {
-                emprestimos.Verificação = true;
+                
                 _db.Emprestimos.Add(emprestimos);
                
                 _db.SaveChanges();
@@ -76,7 +82,7 @@ namespace Emprestimo_de_livro.Controllers
             EmprestimoModel emprestimo = _db.Emprestimos
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
-            emprestimo.Verificação = false;
+            emprestimo.Verificação = true;
             //_db.Remove(emprestimo);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -93,9 +99,26 @@ namespace Emprestimo_de_livro.Controllers
 
             }
             EmprestimoModel emprestimo = _db.Emprestimos.Where(x => x.Id == id).FirstOrDefault();
-            emprestimo.Verificação = true;
+            emprestimo.Verificação = false;
             _db.SaveChanges();
             return RedirectToAction("CancelarRemoção");
         }
+        //[HttpGet]
+        //public Task<IActionResul> Index(int id)
+        //{
+            
+        //        if (id == 0 || id == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        EmprestimoModel emprestimo = _db.Emprestimos.FirstOrDefault(x => x.Id == id);
+
+        //        if (emprestimo == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return View(emprestimo);
+
+        //}
     }
 }

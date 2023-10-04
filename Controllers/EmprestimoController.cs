@@ -3,6 +3,7 @@ using Emprestimo_de_livro.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.DataClassification;
 using Microsoft.VisualBasic;
+using PagedList;
 using System.Data.SqlTypes;
 using System.Linq;
 
@@ -15,10 +16,15 @@ namespace Emprestimo_de_livro.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
+            
             IEnumerable<EmprestimoModel> emprestimos = _db.Emprestimos;
-            return View(emprestimos);
+
+            int paginaTamanho = 1;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(emprestimos.ToPagedList(paginaNumero, paginaTamanho));
         }
         public IActionResult AdicionarEmprestimo()
         {
@@ -97,10 +103,22 @@ namespace Emprestimo_de_livro.Controllers
             _db.SaveChanges();
             return RedirectToAction("CancelarRemoção");
         }
-        public IActionResult buscar()
-        {
-            EmprestimoModel emprestimo = 
-            return RedirectToAction("Index");
-        }
+        //[HttpGet]
+        //public Task<IActionResul> Index(int id)
+        //{
+            
+        //        if (id == 0 || id == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        EmprestimoModel emprestimo = _db.Emprestimos.FirstOrDefault(x => x.Id == id);
+
+        //        if (emprestimo == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return View(emprestimo);
+
+        //}
     }
 }
